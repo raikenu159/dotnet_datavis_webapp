@@ -42,8 +42,8 @@ export class ChartDataHandlerService {
   ];
 
 
-  public GetLineChartDataFromCropYield(cropYieldData: ICropYield[]): ChartData{
-    let outputData: ChartData = 
+  public GetLineChartDataFromCropYield(cropYieldData: ICropYield[]): ChartData<'line'>{
+    let outputData: ChartData<'line'> = 
     {
       labels: [], // ICropYield.year unique sorted
       datasets: 
@@ -62,7 +62,7 @@ export class ChartDataHandlerService {
 
     for (let country of uniqueCountries){
 
-      let countryCropYieldDataset: ChartDataset = this.GetCropYieldValuesByCountry(cropYieldData, country);
+      let countryCropYieldDataset: ChartDatase<'lt = this.GetCropYieldValuesByCountry(cropYieldData, country);
       outputData.datasets.push(
         countryCropYieldDataset
       );
@@ -84,6 +84,7 @@ export class ChartDataHandlerService {
 
     return uniqueCountries.sort();
   }
+
 
   private GetCropYieldValuesByCountry(cropYieldData: ICropYield[], country: string): ChartDataset{
     let output: ChartDataset =

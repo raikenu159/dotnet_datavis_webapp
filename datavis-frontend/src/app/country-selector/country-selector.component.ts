@@ -4,7 +4,7 @@ import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-country-selector',
-  imports: [NgFor],
+  imports: [],
   templateUrl: './country-selector.component.html',
   styleUrl: './country-selector.component.css'
 })

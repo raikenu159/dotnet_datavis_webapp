@@ -12,7 +12,7 @@
 
             @for (crop of selectableCrops; track $index) {
                 <div class="crop-selector-item">
-                    <input type="radio" name="crops" id={{crop.name}} value="{{crop.id}}" />
+                    <input type="radio" name="crop" id={{crop.name}} value="{{crop.id}}" />
                     <label for={{crop.name}}>{{crop.name}}</label>
                 </div>
             }

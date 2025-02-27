@@ -33,17 +33,17 @@ export class AppComponent {
   // Input variables for child selector components
   protected selectableCountries!: ICountry[]; // for CountrySelector, initialized in ngOnInit()
   protected selectableCrops!: ICrop[]; // input for CropSelector, initialized in ngOnInit()
+
+  private selectedCountryIds!: number[];
+  private selectedCropId!: number;
     // For child chart components
   protected  lineChartData!: ChartData;// input for line.chart.component for canvas
 
 
   ngOnInit(): void {
+    // setup data for selector components
     this.selectableCountries = this.GetSelectableCountries();
     this.selectableCrops = this.GetSelectableCrops();
-
-
-    this.SetLineChartCropYieldData([1], 1);
-
   }
 
   /**
@@ -100,11 +100,12 @@ export class AppComponent {
   }
 
   protected OnCountriesSelected(countryIds: number[]): void {
-    this.SetLineChartCropYieldData(countryIds, 1);
+    this.SetLineChartCropYieldData(countryIds, this.selectedCropId);
   }
 
-  protected OnCropSelected(cropId: number): void {
-    console.log("crop selected: " + cropId);
+  protected OnCropSelected(cropId: number|null): void {
+    // console.log("OnCropSelected called and retrieved value was: " + cropId);
+    this.SetLineChartCropYieldData(this.selectedCountryIds, this.selectedCropId);
   }
 
 

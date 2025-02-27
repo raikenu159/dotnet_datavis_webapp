@@ -11,8 +11,15 @@ Chart.register(...registerables);
 })
 
 export class LineChartComponent  implements AfterViewInit{
-  @Input() chartData!: ChartData;
-  @ViewChild('chartCanvas', {static: true}) private chartCanvasRef!: ElementRef<HTMLCanvasElement>;
+  @Input() chartData: ChartData<'line'> = 
+    {
+      labels: [],
+      datasets: [{
+        label: '',
+        data: [],
+      }]
+    };
+  @ViewChild('chartCanvas') private chartCanvasRef!: ElementRef<HTMLCanvasElement>;
 
   public chartObj!: Chart;
 
@@ -51,18 +58,18 @@ export class LineChartComponent  implements AfterViewInit{
   }
 
 
-  private CreateLineChartObj(chartCanvasRef: ElementRef<HTMLCanvasElement>, data: ChartData): Chart{
+  private CreateLineChartObj(chartCanvasRef: ElementRef<HTMLCanvasElement>, lineChartData: ChartData<'line'>): Chart<'line'>{
     const chartCanvasHtml = chartCanvasRef.nativeElement;
 
     if (!chartCanvasHtml){
       throw new Error("failed to get canvas context")
     }
 
-    let chartObj = new Chart(
+    let chartObj = new Chart<'line'>(
       chartCanvasHtml,
       {
         type: 'line',
-        data: data,
+        data: lineChartData,
         options:
         {
           responsive: true,
@@ -76,6 +83,7 @@ export class LineChartComponent  implements AfterViewInit{
         },
       }
     )
+    
     return chartObj;
   }
 }

@@ -13,6 +13,7 @@
     
             <app-crop-selector
                 [selectableCrops]="selectableCrops"
+                (cropSelectedEvent)="OnCropSelected($event)"
                 
             />
             

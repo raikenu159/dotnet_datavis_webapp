@@ -11,16 +11,18 @@ import { ICrop } from '../interfaces/icrop';
 export class CropSelectorComponent {
   @Input() selectableCrops!: ICrop[];
   
-  @Output() cropSelectedEvent = new EventEmitter<number>();
+  @Output() cropSelectedEvent = new EventEmitter<number|null>();
 
   protected submitCrop(event: Event): void {
     event.preventDefault();
 
     let form = event.target as HTMLFormElement;
     let formData = new FormData(form);
+    // console.log("submitCrop called, formdata: ");
+    // console.log(formData.get("crops"), typeof(formData.get("crops")));
 
-    // convert formdata to number
-    // let selectedCropId: number = formData.get
+    let selectedCropId: any = formData.get("crops");
+    this.cropSelectedEvent.emit(selectedCropId);
   }
 
 }
